@@ -1,19 +1,24 @@
 <?php
-require_once 'classes/Usuario.php';
-require_once 'classes/Autenticador.php';
+require_once 'classes/usuario.php';
+require_once 'classes/autenticador.php';
+require_once 'classes/sessao.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $userName = htmlspecialchars(trim($_POST['userName']));
-    $userEmail = filter_var(trim($_POST['userEmail']), FILTER_VALIDATE_EMAIL);
-    $userPassword = $_POST['userPassword'];
 
-    if ($userName && $userEmail && $userPassword) {
-        $newUser  = new Usuario($userName, $userEmail, $userPassword);
-        Autenticador::registrar($newUser );
-        header("Location: login.php");
-        exit;
-    } else {
-        echo "Dados inválidos. <a href='cadastro.php'>Voltar</a>";
-    }
+Sessao::iniciar();
+
+$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+$senha = $_POST['senha'] ?? '';
+
+if (empty($nome) || empty($email) || empty($senha)) {
+    header('Location: Cadastro.php?erro=Preencha todos os campos corretamente.');
+    exit;
 }
+
+if (Autenticador::registrar($nome, $email, $senha)) {
+    header('Location: Login.php');
+} else {
+    header('Location: Cadastro.php?erro=E-mail já cadastrado.');
+}
+exit;
 ?>
