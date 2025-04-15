@@ -1,31 +1,25 @@
 <?php
-$savedEmailCookie = $_COOKIE['email_salvo'] ?? '';
+$email_cookie = $_COOKIE['email'] ?? '';
+$erro = $_GET['erro'] ?? '';
+$sucesso = $_GET['sucesso'] ?? '';
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Login</h2>
-        <form action="processa_login.php" method="POST">
-            <label>Email:</label>
-            <input type="email" name="loginEmail" value="<?= htmlspecialchars($savedEmailCookie) ?>" required>
-            
-            <label>Senha:</label>
-            <input type="password" name="loginPassword" required>
-            
-            <div class="remember-me">
-                <input type="checkbox" name="rememberEmail" <?= $savedEmailCookie ? 'checked' : '' ?>>
-                <span>Lembrar e-mail</span>
-            </div>
-            
-            <button type="submit">Entrar</button>
-        </form>
-        <p class="text-center">Não tem conta? <a href="cadastro.php">Crie uma</a></p>
-    </div>
+<div class="container">
+    <h2>Login</h2>
+    <form method="POST" action="processa_login.php">
+        <input type="email" name="email" value="<?= htmlspecialchars($email_cookie) ?>" placeholder="Email" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <label><input type="checkbox" name="lembrar"> Lembrar e-mail</label>
+        <button type="submit">Login</button>
+    </form>
+    <a href="cadastro.php">Criar conta</a>
+</div>
 </body>
 </html>
