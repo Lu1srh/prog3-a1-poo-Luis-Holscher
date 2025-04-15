@@ -1,0 +1,253 @@
+:root {
+  --cor-primaria: #4361ee;
+  --cor-secundaria: #3f37c9;
+  --cor-texto: #2b2d42;
+  --cor-fundo: #f8f9fa;
+  --cor-branco: #ffffff;
+  --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --borda-arredondada: 8px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.6;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  background: var(--cor-branco);
+  padding: 2rem;
+  border-radius: var(--borda-arredondada);
+  box-shadow: var(--sombra);
+  margin: 20px auto;
+}
+
+h1, h2 {
+  color: var(--cor-primaria);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: -8px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: var(--borda-arredondada);
+  font-size: 16px;
+  transition: border 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: var(--cor-primaria);
+  outline: none;
+}
+
+button, .btn {
+  background-color: var(--cor-primaria);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: var(--borda-arredondada);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
+
+button:hover, .btn:hover {
+  background-color: var(--cor-secundaria);
+}
+
+
+input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+a {
+  color: var(--cor-primaria);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--cor-secundaria);
+  text-decoration: underline;
+}
+
+.dashboard-info {
+  background: #f0f4ff;
+  padding: 1.5rem;
+  border-radius: var(--borda-arredondada);
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-info p {
+  margin: 10px 0;
+}
+
+.alert {
+  padding: 12px;
+  border-radius: var(--borda-arredondada);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.alert-error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.alert-success {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem;
+    margin: 10px;
+  }
+  
+  body {
+    padding: 5px;
+  }
+.cadastro-container {
+  max-width: 500px;
+}
+
+.cadastro-container h2 {
+  color: #3a86ff;
+  margin-bottom: 2rem;
+}
+
+.cadastro-container form {
+  gap: 1.5rem;
+}
+
+.cadastro-container .password-hint {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: -0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-container {
+  max-width: 600px;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h2 {
+  color: #7209b7;
+  font-size: 2rem;
+}
+
+.user-info-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: var(--borda-arredondada);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-left: 5px solid #7209b7;
+}
+
+.user-info-item {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.user-info-item strong {
+  min-width: 150px;
+  display: inline-block;
+  color: #495057;
+}
+
+.dashboard-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.dashboard-actions .btn {
+  flex: 1;
+  max-width: 200px;
+}
+
+.btn-logout {
+  background-color: #ef233c;
+}
+
+.btn-logout:hover {
+  background-color: #d90429;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dashboard-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@media (max-width: 768px) {
+  .dashboard-actions {
+    flex-direction: column;
+  }
+  
+  .dashboard-actions .btn {
+    max-width: 100%;
+  }
+  
+  .user-info-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .user-info-item strong {
+    margin-bottom: 0.3rem;
+  }
+}
+
+}
