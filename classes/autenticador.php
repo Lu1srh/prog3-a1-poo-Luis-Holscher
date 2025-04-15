@@ -1,32 +1,38 @@
 <?php
-require_once('usuario.php');
-require_once('sessao.php');
+require_once 'Usuario.php';
 
 class Autenticador {
-    public static function registrar(Usuario $usuario) {
-        Sessao::iniciar();
+    private static array $usuarios = [];
 
-        if (!isset($_SESSION['usuarios'])) {
-            $_SESSION['usuarios'] = [];
+    public static function carregarUsuarios(): void {
+        if (isset($_SESSION['Usuarios'])) {
+            self::$usuarios = $_SESSION['Usuarios'];
         }
-
-        $_SESSION['usuarios'][] = $usuario;
     }
 
-    public static function autenticar($email, $senha) {
-        Sessao::iniciar();
+    public static function salvarUsuarios(): void {
+        $_SESSION['Usuarios'] = self::$usuarios;
+    }
 
-        if (!isset($_SESSION['usuarios'])) {
-            return null;
+    public static function registrar(string $nome, string $email, string $senha): bool {
+        self::carregarUsuarios();
+        foreach(self::$usuarios as $user) {
+            if ($user->getEmail() === $email) return false;
         }
+        $novoUsuario = new Usuario($nome, $email, $senha);
+        self::$usuarios[] = $novoUsuario;
+        self::salvarUsuarios();
+        return true;
+    }
 
-        foreach ($_SESSION['usuarios'] as $usuario) {
-            if ($usuario->getEmail() === $email && $usuario->verificarSenha($senha)) {
-                return $usuario;
+    public static function login(string $email, string $senha) {
+        self::carregarUsuarios();
+        foreach(self::$usuarios as $user) {
+            if ($user->getEmail() === $email && $user->autenticar($senha)) {
+                return $user;
             }
         }
-
-        return null;
+        return false;
     }
 }
 ?>
