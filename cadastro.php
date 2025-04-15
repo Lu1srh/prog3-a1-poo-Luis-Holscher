@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cadastro de Usuário</title>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="assets/style.css">
 </head>
-<link rel="stylesheet" href="assets/style.css">
 <body>
+<div class="container">
     <h2>Cadastro</h2>
-    <form action="processa_cadastro.php" method="POST">
-        <label>Nome:</label><br>
-        <input type="text" name="userName" required><br>
-        <label>Email:</label><br>
-        <input type="email" name="userEmail" required><br>
-        <label>Senha:</label><br>
-        <input type="password" name="userPassword" required><br><br>
+    <form method="POST" action="processa_cadastro.php">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="senha" placeholder="Senha" required>
         <button type="submit">Cadastrar</button>
     </form>
-    <br>
-    <a href="login.php">Já tem conta? Login</a>
+    <a href="login.php">Já tem conta? Faça login</a>
+</div>
 </body>
 </html>
