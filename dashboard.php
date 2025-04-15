@@ -1,33 +1,38 @@
 <?php
-require_once 'classes/usuario.php';
-require_once 'classes/sessao.php';
-
+require_once 'classes/Sessao.php';
 Sessao::iniciar();
 
-$currentUser = Sessao::get('usuario');
-
-if (!$currentUser) {
-    header("Location: login.php");
+if (!Sessao::get('logged_in')) {
+    header('Location: login.php');
     exit;
 }
 
-$savedEmailCookie = $_COOKIE['email_salvo'] ?? 'Não salvo';
+$nome = Sessao::get('usuario_nome');
+$emailSessao = Sessao::get('usuario_email');
+$emailCookie = $_COOKIE['email'] ?? null;
+$sucesso = $_GET['sucesso'] ?? '';
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Área Restrita</title>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
     <link rel="stylesheet" href="assets/style.css">
+    <script>
+    window.onload = function () {
+        const sucesso = <?= json_encode($sucesso) ?>;
+        if (sucesso) alert(sucesso);
+    };
+    </script>
 </head>
 <body>
-    <div class="container">
-        <h2>Bem-vindo, <?= htmlspecialchars($currentUser->getNome()); ?>!</h2>
-        <div class="dashboard-info">
-            <p><strong>Seu e-mail:</strong> <?= htmlspecialchars($currentUser->getEmail()); ?></p>
-            <p><strong>E-mail salvo no cookie:</strong> <?= htmlspecialchars($savedEmailCookie); ?></p>
-        </div>
-        <a href="logout.php" class="btn">Sair</a>
-    </div>
+<div class="container">
+    <h1>Bem-vindo, <?= htmlspecialchars($nome) ?>!</h1>
+    <p>Email da sessão: <?= htmlspecialchars($emailSessao) ?></p>
+    <?php if ($emailCookie): ?>
+        <p>Email lembrado: <?= htmlspecialchars($emailCookie) ?></p>
+    <?php endif; ?>
+    <a href='logout.php'>Logout</a>
+</div>
 </body>
 </html>
