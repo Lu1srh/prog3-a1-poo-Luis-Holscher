@@ -30,4 +30,3 @@ HTML/CSS
 
 Sessions/Cookies
 
-Não requer banco de dados - os usuários são armazenados em sessão.
