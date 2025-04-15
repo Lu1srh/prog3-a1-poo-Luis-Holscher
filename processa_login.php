@@ -1,29 +1,28 @@
 <?php
-require_once 'classes/sessao.php';
+require_once 'classes/usuario.php';
 require_once 'classes/autenticador.php';
+require_once 'classes/sessao.php';
 
 Sessao::iniciar();
+$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+$senha = $_POST['senha'] ?? '';
+$lembrar = isset($_POST['lembrar']);
 
-$loginEmail = filter_var(trim($_POST['loginEmail']), FILTER_VALIDATE_EMAIL);
-$loginPassword = $_POST['loginPassword'];
-$rememberEmail = isset($_POST['rememberEmail']);
+$usuarioLogado = Autenticador::login($email, $senha);
 
-$authenticatedUser = Autenticador::autenticar($loginEmail, $loginPassword);
-
-if ($authenticatedUser) {
-    Sessao::set('usuario', $authenticatedUser);
-
-    if ($rememberEmail) {
-        setcookie("email_salvo", $loginEmail, time() + (86400 * 30), "/");
-    } else {
-        setcookie("email_salvo", "", time() - 3600, "/");
-    }
-
-    header("Location: dashboard.php");
+if (!$usuarioLogado) {
+    header('Location: Login.php?erro=E-mail ou senha inválidos.');
     exit;
-} else {
-    echo '<div class="container alert alert-error">
-            Login inválido. <a href="login.php">Tentar novamente</a>
-          </div>';
 }
+
+Sessao::set('usuario_nome', $usuarioLogado->getNome());
+Sessao::set('usuario_email', $usuarioLogado->getEmail());
+Sessao::set('logged_in', true);
+
+if ($lembrar) {
+    setcookie('email', $email, time() + (86400 * 30), "/");
+}
+
+header('Location: Dashboard.php'); 
+exit;
 ?>
