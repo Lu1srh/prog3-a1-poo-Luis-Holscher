@@ -1,9 +1,11 @@
 Nome: Luis Ricardo Holscher
 
 Turma: Ciência da Computação 5º fase, São Miguel do Oeste
+____________________________________________________________
 
 
 Sistema de Login PHP
+
 
 Sistema básico de autenticação com:
 
@@ -15,12 +17,14 @@ Dashboard protegido
 
 Lembrar e-mail
 
+____________________________________________________________
 
 Como usar:
 Coloque os arquivos na pasta htdocs do XAMPP
 
 Acesse http://localhost/sua_pasta/login.php
 
+____________________________________________________________
 
 Estrutura principal:
 
@@ -38,6 +42,7 @@ logout.php - Sair do sistema
 
 assets/style.css - Estilos
 
+____________________________________________________________
 
 Tecnologias:
 PHP
