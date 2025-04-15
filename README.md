@@ -18,11 +18,17 @@ Coloque os arquivos na pasta htdocs do XAMPP
 Acesse http://localhost/sua_pasta/login.php
 
 Estrutura principal:
+
 login.php - Página de acesso
+
 cadastro.php - Criar nova conta
+
 dashboard.php - Área logada
+
 logout.php - Sair do sistema
+
 assets/style.css - Estilos
+
 
 Tecnologias:
 PHP
